@@ -65,7 +65,7 @@ const Head = () => {
         </div>
 
         <div className="col-span-1">
-          <Link to={"/myprofile"}>
+          <Link to={"/profile"}>
             <img className="h-8" src={USER_ICON} alt="user-icon" />
           </Link>
         </div>

@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useMostPopularVideos } from "../hooks/useMostPopularVideos";
 import { VideoCard } from "./VideoCard";
 
@@ -15,7 +16,10 @@ const VideoContainer = () => {
       <>
         <div className="m-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {mostPopularVideos.map((video) => (
-            <VideoCard key={video.id} videoInfo={video} />
+            // Here I have used query parameters `?key=value`
+            <Link key={video.id} to={`/watch?v=${video.id}`}>
+              <VideoCard videoInfo={video} />
+            </Link>
           ))}
         </div>
       </>

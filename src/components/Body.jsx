@@ -1,12 +1,20 @@
-import { MainContainer } from "./MainContainer";
+import { Outlet } from "react-router-dom";
+import { Head } from "./Head";
 import { Sidebar } from "./Sidebar";
 
 const Body = () => {
   return (
     <>
+      <Head />
       <div className="flex">
         <Sidebar />
-        <MainContainer />
+        <Outlet />
+        {/**
+         * Outlet replace with path
+         * when path is "/" outlet replace with <MainContainer/>
+         * when path is "/profile" outlet replace with <MyProfile/>
+         *
+         */}
       </div>
     </>
   );

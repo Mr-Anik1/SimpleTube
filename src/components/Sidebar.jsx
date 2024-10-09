@@ -11,7 +11,7 @@ const Sidebar = () => {
   if (!isMenuOpen) return null;
 
   return (
-    <div className="h-screen w-48 p-5 shadow-xl">
+    <div className="min-h-screen w-48 p-5 shadow-xl">
       <ul>
         <li>
           <Link to={"/"}>Home</Link>

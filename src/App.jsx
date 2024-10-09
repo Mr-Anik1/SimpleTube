@@ -1,49 +1,41 @@
 import { Provider } from "react-redux";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Body } from "./components/Body";
 import { ErrorPage } from "./components/ErrorPage";
-import { Head } from "./components/Head";
+import { MainContainer } from "./components/MainContainer";
 import { MyProfile } from "./components/MyProfile";
+import { WatchVideo } from "./components/WatchVideo";
 import { appStore } from "./utils/appStore";
-
-const AppLayout = () => {
-  return (
-    <Provider store={appStore}>
-      <div className="overflow-x-hidden">
-        <Head />
-        <Outlet />
-      </div>
-    </Provider>
-  );
-};
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: <Body />,
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: <MainContainer />,
       },
       {
-        path: "/myprofile",
+        path: "/profile",
         element: <MyProfile />,
+      },
+      {
+        path: "/watch",
+        element: <WatchVideo />,
       },
     ],
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "/error",
-    element: <ErrorPage />,
   },
 ]);
 
 function App() {
   return (
-    <>
-      <RouterProvider router={appRouter} />
-    </>
+    <Provider store={appStore}>
+      <div className="overflow-x-hidden">
+        <RouterProvider router={appRouter} />
+      </div>
+    </Provider>
   );
 }
 
