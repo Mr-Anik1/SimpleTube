@@ -1,6 +1,11 @@
+import { useDispatch } from "react-redux";
+import { addWatchVideoInfo } from "../utils/videoInfoSlice";
+
 const VideoCard = ({ videoInfo }) => {
   // Early return
   if (!videoInfo) return null;
+
+  const dispatch = useDispatch();
 
   const { snippet, statistics, channelIcon } = videoInfo;
   const { channelTitle, title, thumbnails, publishedAt } = snippet;
@@ -15,8 +20,15 @@ const VideoCard = ({ videoInfo }) => {
     return views;
   };
 
+  const handleVideoCardInfo = () => {
+    dispatch(addWatchVideoInfo(videoInfo));
+  };
+
   return (
-    <div className="h-full cursor-pointer overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:shadow-lg hover:shadow-sky-200">
+    <div
+      onClick={handleVideoCardInfo}
+      className="h-full cursor-pointer overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:shadow-lg hover:shadow-sky-200"
+    >
       {/* Thumbnail */}
       <img
         src={thumbnails?.medium?.url}

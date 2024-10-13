@@ -23,7 +23,7 @@ const Head = () => {
 
   return (
     <>
-      <div className="grid grid-flow-col items-center p-4 shadow-lg">
+      <div className="fixed grid w-full grid-flow-col items-center bg-white p-4 shadow-lg">
         <div className="col-span-1 flex items-center gap-4">
           <img
             onClick={handleHamburgerClick}

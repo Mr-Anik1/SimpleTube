@@ -11,6 +11,8 @@ export const USER_ICON =
 
 export const SEARCH_ICON = "https://www.svgrepo.com/show/7109/search.svg";
 
+export const LIKE_IMAGE = "https://iili.io/2HJzetf.png";
+
 export const buttons = [
   { id: "001", name: "All" },
   { id: "002", name: "Songs" },
@@ -33,4 +35,9 @@ export const MOST_POPULAR_VIDEOS_URL = `https://youtube.googleapis.com/youtube/v
 
 export const CHANNELS_API_URL = (channelId) => {
   return `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${GOOGLE_API_KEY}`;
+};
+
+export const RELATED_VIDEOS = (channelId) => {
+  return `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&order=date&maxResults=6&key=${GOOGLE_API_KEY}
+`;
 };

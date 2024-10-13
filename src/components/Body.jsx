@@ -6,7 +6,7 @@ const Body = () => {
   return (
     <>
       <Head />
-      <div className="flex">
+      <div className="mt-[4.6rem] flex">
         <Sidebar />
         <Outlet />
         {/**
