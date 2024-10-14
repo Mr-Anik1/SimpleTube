@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
@@ -6,6 +6,7 @@ import { LIKE_IMAGE } from "../utils/constants";
 import { RelatedVideos } from "./RelatedVideos";
 
 const WatchVideo = () => {
+  const [fullDescription, setFullDescription] = useState(false);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
@@ -47,6 +48,10 @@ const WatchVideo = () => {
       return (likes / 1000).toFixed(1) + "K";
     }
     return likes;
+  };
+
+  const handleDescriptionClick = () => {
+    setFullDescription(true);
   };
 
   // When watch page will load, menu will be closed.
@@ -103,9 +108,23 @@ const WatchVideo = () => {
               <div className="rounded-xl bg-gray-300 p-3">
                 <p className="text-sm font-semibold">
                   <span>{(+statistics?.viewCount).toLocaleString()} views</span>
-                  <span className="pl-4">{getTimeDifference(publishedAt)}</span>
+
+                  <span className="pl-8">{getTimeDifference(publishedAt)}</span>
+
+                  <span
+                    onClick={handleDescriptionClick}
+                    className="cursor-pointer pl-8 text-blue-800 hover:text-purple-700 hover:underline hover:underline-offset-2"
+                  >
+                    See Full Description
+                  </span>
                 </p>
-                <p className="line-clamp-6 text-sm">{description}</p>
+
+                {/* When fullDescription is true it shows full description otherwise not. */}
+                {fullDescription ? (
+                  <p className="text-sm">{description}</p>
+                ) : (
+                  <p className="line-clamp-6 text-sm">{description}</p>
+                )}
               </div>
             </div>
           </div>
