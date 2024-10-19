@@ -41,3 +41,6 @@ export const RELATED_VIDEOS = (channelId) => {
   return `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&order=date&maxResults=6&key=${GOOGLE_API_KEY}
 `;
 };
+
+export const SEARCH_SUGGESTIONS =
+  "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
