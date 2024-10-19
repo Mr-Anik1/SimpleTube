@@ -3,19 +3,24 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaSearchengin } from "react-icons/fa6";
 import { GoSearch } from "react-icons/go";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { toggelMenu } from "../utils/appSlice";
 import { SEARCH_SUGGESTIONS, YOUTUBE_LOGO } from "../utils/constants";
+import { addSearchSuggestion } from "../utils/searchSlice";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchSuggestions, setSearchSuggestions] = useState([]);
   const dispatch = useDispatch();
 
   // Debounce Hook
   const debouncedSearchTerm = useDebouncedValue(searchQuery, 200);
+
+  // Does [debouncedSearchTerm] exists in the search suggestion list
+  const searchSuggestions = useSelector(
+    (store) => store?.search?.searchSuggestionList[debouncedSearchTerm],
+  );
 
   const handleHamburgerClick = () => {
     dispatch(toggelMenu());
@@ -31,11 +36,12 @@ const Head = () => {
     const response = await fetch(SEARCH_SUGGESTIONS + debouncedSearchTerm);
     const data = await response.json();
 
-    setSearchSuggestions(data[1]);
+    // Computed property names provide a way to define object keys dynamically, using variables or expressions at runtime. Here debouncedSearchTerm use as a key.
+    dispatch(addSearchSuggestion({ [debouncedSearchTerm]: data[1] }));
   };
 
   useEffect(() => {
-    getSearchSuggestions();
+    !searchSuggestions && getSearchSuggestions();
   }, [debouncedSearchTerm]);
 
   return (
@@ -79,7 +85,7 @@ const Head = () => {
           </div>
 
           {/* Search Suggestions */}
-          {searchSuggestions.length > 0 && (
+          {searchSuggestions && searchSuggestions.length > 0 && (
             <div className="fixed z-20 m-1 w-[25%] rounded-xl bg-gray-200 px-5 py-3">
               <ul className="flex cursor-pointer flex-col gap-3 font-semibold">
                 {searchSuggestions?.map((value) => (
