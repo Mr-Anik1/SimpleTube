@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import { BiSolidLike } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
-import { LIKE_IMAGE } from "../utils/constants";
 import { RelatedVideos } from "./RelatedVideos";
 
 const WatchVideo = () => {
@@ -99,7 +99,8 @@ const WatchVideo = () => {
 
                 {/* Like Button */}
                 <div className="ml-6 flex cursor-pointer items-center gap-1 rounded-full bg-amber-50 px-3 py-2 text-sm font-medium shadow-md">
-                  <img className="h-6 w-6" src={LIKE_IMAGE} alt="like-button" />
+                  <BiSolidLike className="h-5 w-5" />
+
                   <p>{formatLikes(statistics?.likeCount)}</p>
                 </div>
               </div>

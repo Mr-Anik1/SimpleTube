@@ -1,17 +1,4 @@
-export const HAMBURGER_MENU =
-  "https://e7.pngegg.com/pngimages/436/707/png-clipart-hamburger-button-computer-icons-menu-menu-food-text-thumbnail.png";
-
-export const CROSS_HAMBURGER =
-  "https://w7.pngwing.com/pngs/4/1018/png-transparent-computer-icons-share-icon-hamburger-button-crossed-logo-share-icon-symbol.png";
-
 export const YOUTUBE_LOGO = "https://iili.io/dbiJLKX.png";
-
-export const USER_ICON =
-  "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png";
-
-export const SEARCH_ICON = "https://www.svgrepo.com/show/7109/search.svg";
-
-export const LIKE_IMAGE = "https://iili.io/2HJzetf.png";
 
 export const buttons = [
   { id: "001", name: "All" },

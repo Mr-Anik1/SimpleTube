@@ -61,11 +61,3 @@ const obj = {
     publishTime: "2024-10-12T00:50:00Z",
   },
 };
-
-{
-  /* <img
-                  className="h-5 w-5 fill-slate-300"
-                  src={SEARCH_ICON}
-                  alt="search-icon"
-                /> */
-}
