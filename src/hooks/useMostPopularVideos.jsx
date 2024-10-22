@@ -53,7 +53,7 @@ const useMostPopularVideos = () => {
       dispatch(addMostPopularVideos(videosWithChannelIcons));
     } catch (error) {
       // If any error happens
-      navigate("/error");
+      // navigate("/error");
     }
   };
 

@@ -3,6 +3,7 @@ import { BiSolidLike } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
+import { CommentsContainer } from "./CommentsContainer";
 import { RelatedVideos } from "./RelatedVideos";
 
 const WatchVideo = () => {
@@ -74,14 +75,14 @@ const WatchVideo = () => {
             ></iframe>
           </div>
 
-          {/* Video Details */}
+          {/* Video Details & Comments Section */}
           <div className="col-start-1 col-end-9 row-start-4 row-end-6">
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col gap-3">
               {/* Vidoe Title */}
-              <h1 className="w-full text-2xl font-semibold">{title}</h1>
+              <h1 className="text-2xl font-semibold">{title}</h1>
 
               {/* logo,channelname,subscribe,like */}
-              <div className="flex w-full items-center gap-3">
+              <div className="flex items-center gap-3">
                 {/* Channel icon */}
                 <div className="h-12 w-12 flex-shrink-0">
                   <img
@@ -126,6 +127,11 @@ const WatchVideo = () => {
                 ) : (
                   <p className="line-clamp-6 text-sm">{description}</p>
                 )}
+              </div>
+
+              {/* Comments */}
+              <div className="mt-4">
+                <CommentsContainer />
               </div>
             </div>
           </div>

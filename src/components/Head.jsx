@@ -12,6 +12,7 @@ import { addSearchSuggestion } from "../utils/searchSlice";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const dispatch = useDispatch();
 
   // Debounce Hook
@@ -28,6 +29,7 @@ const Head = () => {
 
   // When I will click the search button
   const handleSearchButtonClick = () => {
+    setShowSuggestions(false);
     // console.log(searchQuery);
   };
 
@@ -41,6 +43,7 @@ const Head = () => {
   };
 
   useEffect(() => {
+    // When searchSuggestions doesn't exist in the redux store make API call.
     !searchSuggestions && getSearchSuggestions();
   }, [debouncedSearchTerm]);
 
@@ -74,6 +77,7 @@ const Head = () => {
                 name="search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setShowSuggestions(true)}
               />
             </label>
             <button
@@ -85,23 +89,25 @@ const Head = () => {
           </div>
 
           {/* Search Suggestions */}
-          {searchSuggestions && searchSuggestions.length > 0 && (
-            <div className="fixed z-20 m-1 w-[25%] rounded-xl bg-gray-200 px-5 py-3">
-              <ul className="flex cursor-pointer flex-col gap-3 font-semibold">
-                {searchSuggestions?.map((value) => (
-                  <li
-                    key={value}
-                    onClick={() => setSearchQuery(value)}
-                    className="rounded bg-slate-300 px-2 py-1 shadow-sm duration-300 hover:scale-105 hover:shadow-md hover:shadow-sky-200"
-                  >
-                    <span className="flex items-center gap-2">
-                      <FaSearchengin className="h-5 w-5 shrink-0" /> {value}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {searchSuggestions &&
+            searchSuggestions.length > 0 &&
+            showSuggestions && (
+              <div className="fixed z-20 m-1 w-[25%] rounded-xl bg-gray-200 px-5 py-3">
+                <ul className="flex cursor-pointer flex-col gap-3 font-semibold">
+                  {searchSuggestions?.map((value) => (
+                    <li
+                      key={value}
+                      onClick={() => setSearchQuery(value)}
+                      className="rounded bg-slate-300 px-2 py-1 shadow-sm duration-300 hover:scale-105 hover:shadow-md hover:shadow-sky-200"
+                    >
+                      <span className="flex items-center gap-2">
+                        <FaSearchengin className="h-5 w-5 shrink-0" /> {value}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
         </div>
 
         <div className="col-span-1">
