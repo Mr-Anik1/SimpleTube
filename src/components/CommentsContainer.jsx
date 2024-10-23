@@ -21,9 +21,12 @@ const CommentList = ({ comments }) => {
 const CommentsContainer = () => {
   return (
     <>
-      <div className="mb-8 rounded-lg bg-gray-300 p-4">
-        <h1 className="mb-4 text-2xl font-bold">Comments:</h1>
-        <CommentList comments={commentsData} />
+      <div className="mb-2 rounded-lg bg-gray-300 p-4">
+        <h1 className="mb-2 text-2xl font-bold">Comments:</h1>
+
+        <div className="max-h-[calc(70vh-3rem)] overflow-auto">
+          <CommentList comments={commentsData} />
+        </div>
       </div>
     </>
   );

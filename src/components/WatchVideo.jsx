@@ -63,28 +63,29 @@ const WatchVideo = () => {
   return (
     videoId && (
       <>
-        <div className="grid h-screen w-screen grid-cols-12 grid-rows-5 gap-2 px-6 py-3">
-          {/* Vidoe Section */}
-          <div className="col-start-1 col-end-9 row-start-1 row-end-4 overflow-hidden rounded-xl">
-            <iframe
-              className="h-full w-full origin-center border-0"
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
-              allowFullScreen
-            ></iframe>
-          </div>
+        <div className="flex px-6 py-3">
+          {/* Left Side: Video Section, Video Details, Comments */}
+          <div className="w-[70%]">
+            {/* Video Section */}
+            <div className="w-full overflow-hidden rounded-xl">
+              <iframe
+                className="h-[25rem] w-full rounded-xl border-0"
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
+                allowFullScreen
+              ></iframe>
+            </div>
 
-          {/* Video Details & Comments Section */}
-          <div className="col-start-1 col-end-9 row-start-4 row-end-6">
-            <div className="flex flex-col gap-3">
-              {/* Vidoe Title */}
+            {/* Video Details & Comments Section */}
+            <div className="mt-4 space-y-4">
+              {/* Video Title */}
               <h1 className="text-2xl font-semibold">{title}</h1>
 
-              {/* logo,channelname,subscribe,like */}
+              {/* Channel Info, Subscribe, and Like */}
               <div className="flex items-center gap-3">
                 {/* Channel icon */}
-                <div className="h-12 w-12 flex-shrink-0">
+                <div className="h-12 w-12">
                   <img
                     src={channelIcon}
                     alt={channelTitle}
@@ -94,14 +95,13 @@ const WatchVideo = () => {
 
                 <h3 className="text-lg font-semibold">{channelTitle}</h3>
 
-                <button className="ml-6 rounded-full bg-gradient-to-r from-red-600 to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-md shadow-slate-300 transition duration-300 hover:scale-105 hover:shadow-lime-200">
+                <button className="ml-6 rounded-full bg-gradient-to-r from-red-600 to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-md transition-transform duration-300 hover:scale-105">
                   Subscribe
                 </button>
 
                 {/* Like Button */}
                 <div className="ml-6 flex cursor-pointer items-center gap-1 rounded-full bg-amber-50 px-3 py-2 text-sm font-medium shadow-md">
                   <BiSolidLike className="h-5 w-5" />
-
                   <p>{formatLikes(statistics?.likeCount)}</p>
                 </div>
               </div>
@@ -109,10 +109,8 @@ const WatchVideo = () => {
               {/* Description */}
               <div className="rounded-xl bg-gray-300 p-3">
                 <p className="text-sm font-semibold">
-                  <span>{(+statistics?.viewCount).toLocaleString()} views</span>
-
+                  {(+statistics?.viewCount).toLocaleString()} views
                   <span className="pl-8">{getTimeDifference(publishedAt)}</span>
-
                   <span
                     onClick={handleDescriptionClick}
                     className="cursor-pointer pl-8 text-blue-800 hover:text-purple-700 hover:underline hover:underline-offset-2"
@@ -121,24 +119,28 @@ const WatchVideo = () => {
                   </span>
                 </p>
 
-                {/* When fullDescription is true it shows full description otherwise not. */}
-                {fullDescription ? (
-                  <p className="text-sm">{description}</p>
-                ) : (
-                  <p className="line-clamp-6 text-sm">{description}</p>
-                )}
+                {/* Toggle Full Description */}
+                <p className="mt-2 text-sm">
+                  {fullDescription ? (
+                    description
+                  ) : (
+                    <p className="line-clamp-6">{description}</p>
+                  )}
+                </p>
               </div>
 
-              {/* Comments */}
-              <div className="mt-4">
+              {/* Comments Section */}
+              <div>
                 <CommentsContainer />
               </div>
             </div>
           </div>
 
-          {/* Related Video Section */}
-          <div className="col-start-9 col-end-13 row-start-1 row-end-6 ml-2 pl-1">
-            <RelatedVideos channelId={channelId} />
+          {/* Right Side: Related Videos */}
+          <div className="w-[30%] pl-6">
+            <div className="max-h-[calc(150vh-3rem)] overflow-auto rounded-lg">
+              <RelatedVideos channelId={channelId} />
+            </div>
           </div>
         </div>
       </>

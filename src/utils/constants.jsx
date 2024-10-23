@@ -25,7 +25,7 @@ export const CHANNELS_API_URL = (channelId) => {
 };
 
 export const RELATED_VIDEOS = (channelId) => {
-  return `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&order=date&maxResults=10&key=${GOOGLE_API_KEY}
+  return `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&order=date&maxResults=20&key=${GOOGLE_API_KEY}
 `;
 };
 
