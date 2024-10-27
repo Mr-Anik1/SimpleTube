@@ -1,4 +1,4 @@
-import { commentsData } from "../utils/constants";
+import { commentsData } from "../utils/helper";
 import { Comment } from "./Comment";
 
 const CommentList = ({ comments }) => {
